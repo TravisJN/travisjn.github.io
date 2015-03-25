@@ -1,0 +1,169 @@
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Closures in Javascript</title>
+    <meta name="description" content="">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/screen.css?v=37bd518ba8">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400">
+
+    <link rel="canonical" href="http://localhost:2368/closures-in-javascript/">
+    
+    <meta property="og:site_name" content="TravLearnsJS">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Closures in Javascript">
+    <meta property="og:description" content="Closures can be a tricky bit of javascript.  Let's say you have a function that you want to call many times, and within that function is a variable that gets declared and stores a piece of data that is updated...">
+    <meta property="og:url" content="http://localhost:2368/closures-in-javascript/">
+    <meta property="article:published_time" content="2015-03-25T02:15:14.085Z">
+    <meta property="article:modified_time" content="2015-03-25T02:15:14.084Z">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Closures in Javascript">
+    <meta name="twitter:description" content="Closures can be a tricky bit of javascript.  Let's say you have a function that you want to call many times, and within that function is a variable that gets declared and stores a piece of data that is updated...">
+    <meta name="twitter:url" content="http://localhost:2368/closures-in-javascript/">
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "TravLearnsJS",
+    "author": {
+        "@type": "Person",
+        "name": "Travis Neufeld",
+        "image": "//www.gravatar.com/avatar/d02f1d451097a193d4d54da68ad468c2?s=250&d=mm&r=x",
+        "url": "http://localhost:2368/author/travis",
+        "sameAs": null
+    },
+    "headline": "Closures in Javascript",
+    "url": "http://localhost:2368/closures-in-javascript/",
+    "datePublished": "2015-03-25T02:15:14.085Z",
+    "dateModified": "2015-03-25T02:15:14.084Z",
+    "description": "Closures can be a tricky bit of javascript.  Let&#x27;s say you have a function that you want to call many times, and within that function is a variable that gets declared and stores a piece of data that is updated..."
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.5">
+    <link rel="alternate" type="application/rss+xml" title="TravLearnsJS" href="http://localhost:2368/rss/">
+</head>
+<body class="post-template nav-closed">
+
+    <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="index.html#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+            <li class="nav-home" role="presentation"><a href="http://localhost:2368/">Home</a></li>
+    </ul>
+    <a class="subscribe-button icon-feed" href="../rss/index.rss">Subscribe</a>
+</div>
+<span class="nav-cover"></span>
+
+
+    <div class="site-wrapper">
+
+        
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        
+            <a class="menu-button" href="index.html#"><span class="burger">☰</span><span class="word">Menu</span></a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">Closures in Javascript</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2015-03-24">24 March 2015</time> 
+            </section>
+        </header>
+
+        <section class="post-content">
+            <p>Closures can be a tricky bit of javascript.  Let's say you have a function that you want to call many times, and within that function is a variable that gets declared and stores a piece of data that is updated each time the function is called.  Intuitively, one would think the variable, which is declared within the function, would be recreated when the function is called and deleted when the function terminates.  But this is coding, and it ain't always intuitive.</p>
+
+<p>In reality, a javascript function (and everything within it) stays alive in memory until nothing else in the program points to that function.  This deep function that is saved in memory is called a closure, and closures can be your friend.  We were shown a great example of this in class by way of a function called "once".  "Once" is actually a method in UnderscoreJS that can be really useful for optimizing your code.  Essentially, if you have a  function that takes a lot of processing power that needs to be called over and over again, it can be really taxing on your users' systems and cause a frustrating slowdown.  "Once" fixes this by taking a function (your heavily taxing function) as an argument and saving its resulting value in memory so when that same function is called again, the stored result is simply returned and the function isn't run a second (or third, or fourth) time.</p>
+
+<p>Let's take a look at the code:  </p>
+
+<blockquote>  
+<p style="text-align:left;"> _.once = function(passedFunction) {<br>  
+</p><p style="text-align:left;">    var alreadyCalled = false;     //we set a boolean here that initializes to false which<br>  
+</p><p style="text-align:left;">                                                //will tell the function if the passedFunction has been called<br>  
+</p><p style="text-align:left;">    var result;   //this variable will store the resulting value of running the function</p>  
+<p style="text-align:left;">    return function() {  //because we are creating a function within a function, a closure scope is created</p>  
+<p style="text-align:left;">        if (!alreadyCalled) {  //check if the function has been run before</p>  
+<p style="text-align:left;">        result = func.apply(this, arguments);  //run the function and set its value to result</p>  
+<p style="text-align:left;">        alreadyCalled = true;  //set alreadyCalled to true so the function is not run next time it's called</p>  
+<p style="text-align:left;">    }</p>  
+<p style="text-align:left;">    return result;  //return the value of the function</p>  
+<p style="text-align:left;">     };</p>  
+<p style="text-align:left;">};</p>  
+</blockquote>  
+
+<p style="text-align:left;">Creating a closure scope is as simple as constructing a function within a function.  Because the variables alreadyCalled and result are declared in the outer function, they are saved in memory as long as one part of the code is still pointing to it.  Therefore, when we call _.once a second time, alreadyCalled and result will retain their values from when they were called the first time even though we are calling the function again.  The reason behind this somewhat mysterious characteristic of Javascript has to do with the way JS allocates its memory when it encounters functions within functions.  As a result, we the coders reap the benefits of values being saved after the functions they're declared within terminate.  This is just one (simple) explanation of a javascript closure.</p>  
+
+<p> </p>
+        </section>
+
+        <footer class="post-footer">
+
+
+            <figure class="author-image">
+                <a class="img" href="../author/travis/" style="background-image: url(http://www.gravatar.com/avatar/d02f1d451097a193d4d54da68ad468c2?s=250&amp;d=mm&amp;r=x)"><span class="hidden">Travis Neufeld's Picture</span></a>
+            </figure>
+
+            <section class="author">
+                <h4><a href="../author/travis/">Travis Neufeld</a></h4>
+
+                    <p>Read <a href="../author/travis/">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    
+                    
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/share?text=Closures%20in%20Javascript&amp;url=http://localhost:2368/closures-in-javascript/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/closures-in-javascript/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://localhost:2368/closures-in-javascript/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+        </footer>
+
+    </article>
+</main>
+
+
+
+        <footer class="site-footer clearfix">
+            <section class="copyright"><a href="http://localhost:2368">TravLearnsJS</a> © 2015</section>
+            <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
+        </footer>
+
+    </div>
+
+    <script src="../public/jquery.js?v=37bd518ba8"></script>
+
+    <script type="text/javascript" src="../assets/js/jquery.fitvids.js?v=37bd518ba8"></script>
+    <script type="text/javascript" src="../assets/js/index.js?v=37bd518ba8"></script>
+
+</body>
