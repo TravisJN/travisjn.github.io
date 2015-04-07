@@ -1,0 +1,154 @@
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Secure Authorization Techniques</title>
+    <meta name="description" content="">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/screen.css?v=2bd137a6de">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400">
+
+    <link rel="canonical" href="http://localhost:2368/secure-authorization-techniques/">
+    
+    <meta property="og:site_name" content="TravLearnsJS">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Secure Authorization Techniques">
+    <meta property="og:description" content="Before a couple of days ago, when I heard the words salt and hash I would immediately think of a delicious breakfast slam at a diner in the snow with a cup of coffee as the pangs of hunger crept...">
+    <meta property="og:url" content="http://localhost:2368/secure-authorization-techniques/">
+    <meta property="article:published_time" content="2015-04-07T16:06:33.524Z">
+    <meta property="article:modified_time" content="2015-04-07T16:06:33.523Z">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Secure Authorization Techniques">
+    <meta name="twitter:description" content="Before a couple of days ago, when I heard the words salt and hash I would immediately think of a delicious breakfast slam at a diner in the snow with a cup of coffee as the pangs of hunger crept...">
+    <meta name="twitter:url" content="http://localhost:2368/secure-authorization-techniques/">
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "TravLearnsJS",
+    "author": {
+        "@type": "Person",
+        "name": "Travis Neufeld",
+        "image": "//www.gravatar.com/avatar/d02f1d451097a193d4d54da68ad468c2?s=250&d=mm&r=x",
+        "url": "http://localhost:2368/author/travis",
+        "sameAs": null
+    },
+    "headline": "Secure Authorization Techniques",
+    "url": "http://localhost:2368/secure-authorization-techniques/",
+    "datePublished": "2015-04-07T16:06:33.524Z",
+    "dateModified": "2015-04-07T16:06:33.523Z",
+    "description": "Before a couple of days ago, when I heard the words salt and hash I would immediately think of a delicious breakfast slam at a diner in the snow with a cup of coffee as the pangs of hunger crept..."
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.5">
+    <link rel="alternate" type="application/rss+xml" title="TravLearnsJS" href="http://localhost:2368/rss/">
+</head>
+<body class="post-template nav-closed">
+
+    <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="index.html#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+            <li class="nav-home" role="presentation"><a href="http://localhost:2368/">Home</a></li>
+    </ul>
+    <a class="subscribe-button icon-feed" href="../rss/index.rss">Subscribe</a>
+</div>
+<span class="nav-cover"></span>
+
+
+    <div class="site-wrapper">
+
+        
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        
+            <a class="menu-button" href="index.html#"><span class="burger">☰</span><span class="word">Menu</span></a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">Secure Authorization Techniques</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2015-04-07">07 April 2015</time> 
+            </section>
+        </header>
+
+        <section class="post-content">
+            <p>Before a couple of days ago, when I heard the words salt and hash I would immediately think of a delicious breakfast slam at a diner in the snow with a cup of coffee as the pangs of hunger crept into my reality, jarring me from my daydream only to find myself irritable and slightly upset at whoever haphazardly used those words in casual conversation.  Now though, thanks to MakerSquare, my mind naturally gravitates elsewhere: user authentication.</p>
+
+<p>So what are the common techniques for user auth and how are they related to a breakfast combo #3 with orange juice? (they're not).  Firstly, passwords need to be stored somewhere for reference so that they can be compared against when a user logs in.  If a company stored these passwords in plain text as they were typed in, anyone could simply look at the database and see which password corresponds with which username and  BAM! Bye bye sensitive personal info.  </p>
+
+<p>So the first logical step in securely storing passwords is encryption.  This involves taking the password and running it through an encrypting algorithm and therefore storing it as a secret code.  If you entered that code in as the password, it wouldn't work because the computer will compare the password that the user entered with a decrypted version of the password stored on the database.  Sounds great right?  It's definitely loads better than plain text storage but an issue arises in that there is only one key to encrypt and decrypt every password.  If someone, say a disgruntled employee, had a hold of it, they could decrypt every password in the database and double BAM! No one trusts your service anymore.</p>
+
+<p>Enter hashing.  Hashing is similar to encryption in that it takes a plain text password and runs it through an algorithm which converts it into a jumble of letters and symbols.  The difference is that the algorithm is designed in such a way that the stored jumbles can't be 'dehashed'.  Therefore there's not a key that one could get a hold of to see all the passwords in a database, but there is still some risk.  A hacker who has access to the database and algorithm could use brute force techniques to create what's called a rainbow table: a table of commonly used passwords and what they hash into.  The hacker can take the most common passwords and see if there's a correlation in the database.  BAM again.  </p>
+
+<p>So finally, there's salt.  Salt is a long string of letters and numbers that is usually randomly generated  and appended to the password before it enters the hashing machine.  The purpose of this is to make the stored jumble of letters and characters too damn long to be feasible to brute force.  Making a rainbow table of a medium size could literally take billions of years to compute!  Now that's some salty hashness.</p>
+        </section>
+
+        <footer class="post-footer">
+
+
+            <figure class="author-image">
+                <a class="img" href="../author/travis/" style="background-image: url(http://www.gravatar.com/avatar/d02f1d451097a193d4d54da68ad468c2?s=250&amp;d=mm&amp;r=x)"><span class="hidden">Travis Neufeld's Picture</span></a>
+            </figure>
+
+            <section class="author">
+                <h4><a href="../author/travis/">Travis Neufeld</a></h4>
+
+                    <p>Read <a href="../author/travis/">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    
+                    
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/share?text=Secure%20Authorization%20Techniques&amp;url=http://localhost:2368/secure-authorization-techniques/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/secure-authorization-techniques/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://localhost:2368/secure-authorization-techniques/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+        </footer>
+
+    </article>
+</main>
+
+
+
+        <footer class="site-footer clearfix">
+            <section class="copyright"><a href="http://localhost:2368">TravLearnsJS</a> © 2015</section>
+            <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
+        </footer>
+
+    </div>
+
+    <script src="../public/jquery.js?v=2bd137a6de"></script>
+
+    <script type="text/javascript" src="../assets/js/jquery.fitvids.js?v=2bd137a6de"></script>
+    <script type="text/javascript" src="../assets/js/index.js?v=2bd137a6de"></script>
+
+</body>
