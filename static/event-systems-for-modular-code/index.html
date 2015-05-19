@@ -1,0 +1,152 @@
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Event Systems for Modular Code</title>
+    <meta name="description" content="">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/screen.css?v=8ca38d0623">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400">
+
+    <link rel="canonical" href="http://localhost:2368/event-systems-for-modular-code/">
+    
+    <meta property="og:site_name" content="TravLearnsJS">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Event Systems for Modular Code">
+    <meta property="og:description" content="Since I began my education of the exciting world of computer programming, I always wrote code in a similar fashion:  Think about the problem as a whole, decide where to start, code, decide what the next step should be, code,...">
+    <meta property="og:url" content="http://localhost:2368/event-systems-for-modular-code/">
+    <meta property="article:published_time" content="2015-03-25T15:51:47.979Z">
+    <meta property="article:modified_time" content="2015-03-25T15:51:47.979Z">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Event Systems for Modular Code">
+    <meta name="twitter:description" content="Since I began my education of the exciting world of computer programming, I always wrote code in a similar fashion:  Think about the problem as a whole, decide where to start, code, decide what the next step should be, code,...">
+    <meta name="twitter:url" content="http://localhost:2368/event-systems-for-modular-code/">
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "TravLearnsJS",
+    "author": {
+        "@type": "Person",
+        "name": "Travis Neufeld",
+        "image": "//www.gravatar.com/avatar/d02f1d451097a193d4d54da68ad468c2?s=250&d=mm&r=x",
+        "url": "http://localhost:2368/author/travis",
+        "sameAs": null
+    },
+    "headline": "Event Systems for Modular Code",
+    "url": "http://localhost:2368/event-systems-for-modular-code/",
+    "datePublished": "2015-03-25T15:51:47.979Z",
+    "dateModified": "2015-03-25T15:51:47.979Z",
+    "description": "Since I began my education of the exciting world of computer programming, I always wrote code in a similar fashion:  Think about the problem as a whole, decide where to start, code, decide what the next step should be, code,..."
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.5">
+    <link rel="alternate" type="application/rss+xml" title="TravLearnsJS" href="http://localhost:2368/rss/">
+</head>
+<body class="post-template nav-closed">
+
+    <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="index.html#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+            <li class="nav-home" role="presentation"><a href="http://localhost:2368/">Home</a></li>
+    </ul>
+    <a class="subscribe-button icon-feed" href="../rss/index.rss">Subscribe</a>
+</div>
+<span class="nav-cover"></span>
+
+
+    <div class="site-wrapper">
+
+        
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        
+            <a class="menu-button" href="index.html#"><span class="burger">☰</span><span class="word">Menu</span></a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">Event Systems for Modular Code</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2015-03-25">25 March 2015</time> 
+            </section>
+        </header>
+
+        <section class="post-content">
+            <p>Since I began my education of the exciting world of computer programming, I always wrote code in a similar fashion:  Think about the problem as a whole, decide where to start, code, decide what the next step should be, code, and so on.  This linear way of writing programs function by function without much consideration of the big picture has often led to code that, though working, is very difficult to change.  It has worked well enough for me in the past, but this is mostly due to the fact that I've only made relatively small projects and they've all been coded solo.  I can recall a few specific instances when I've wanted to remove a feature or refactor a function and it was never as easy as simply deleting that function.  Instead it would lead me on a path going from function to function, deleting arguments and function calls sometimes all the way back to the initial function call.  </p>
+
+<h3 id="entereventsystems">Enter Event Systems</h3>
+
+<p>This past week at MakerSquare we were introduced to MVC (Model-View-Controller) and using event systems to control flow. The topic was introduced to us specifically in Backbone though the concepts are applicable to any computer application made with nearly any language.  The idea is that each module of your application has a degree of separation from every other piece and therefore can be removed, copied or adjusted easily without affecting other parts of your program.  This is achieved by using triggers and listeners to react to events that occur within your program. <br>
+A very naive and possibly contrived example: <br>
+Let's say you have a function that takes in user input and stores it in an array.  Your program is then supposed to take that array and sort it before sending it across the internets to cloud land.  In most cases, one might intuitively think to create a function that sorts the array and a function that sends it to cloud land, then simply calling each function in succession from within the previous function.  In this program, if we wanted to remove the sortArray function, our application would break and we would get an error.  MVC solves this with listeners and triggers.  Instead of directly linking each of our functions the flow would occur as follows:  User input is obtained by our first function and then that function fires a trigger.  Triggers simply send a signal to your application saying "Hey everyone! I've been triggered!", now the functions that are listening for that trigger will hear it and do their thing.  So in our example, we will set up listeners on the sort function and the send to cloud function.  This makes our code much more modular because if we want to remove our sort function, our code will still work!  The trigger will fire like it always has and anyone listening will do their thing, in this case it will just be the send to cloud function.  </p>
+        </section>
+
+        <footer class="post-footer">
+
+
+            <figure class="author-image">
+                <a class="img" href="../author/travis/" style="background-image: url(http://www.gravatar.com/avatar/d02f1d451097a193d4d54da68ad468c2?s=250&amp;d=mm&amp;r=x)"><span class="hidden">Travis Neufeld's Picture</span></a>
+            </figure>
+
+            <section class="author">
+                <h4><a href="../author/travis/">Travis Neufeld</a></h4>
+
+                    <p>Read <a href="../author/travis/">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    
+                    
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/share?text=Event%20Systems%20for%20Modular%20Code&amp;url=http://localhost:2368/event-systems-for-modular-code/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/event-systems-for-modular-code/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://localhost:2368/event-systems-for-modular-code/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+        </footer>
+
+    </article>
+</main>
+
+
+
+        <footer class="site-footer clearfix">
+            <section class="copyright"><a href="http://localhost:2368">TravLearnsJS</a> © 2015</section>
+            <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
+        </footer>
+
+    </div>
+
+    <script src="../public/jquery.js?v=8ca38d0623"></script>
+
+    <script type="text/javascript" src="../assets/js/jquery.fitvids.js?v=8ca38d0623"></script>
+    <script type="text/javascript" src="../assets/js/index.js?v=8ca38d0623"></script>
+
+</body>

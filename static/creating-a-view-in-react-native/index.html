@@ -1,0 +1,150 @@
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Creating a view in React Native</title>
+    <meta name="description" content="">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/screen.css?v=8ca38d0623">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400">
+
+    <link rel="canonical" href="http://localhost:2368/creating-a-view-in-react-native/">
+    
+    <meta property="og:site_name" content="TravLearnsJS">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Creating a view in React Native">
+    <meta property="og:description" content="React Native is a great tool with potentially far-reaching implications on how the future of mobile development will play out.  The ability to create native iOS and Android apps in JavaScript breaks down what otherwise would be a high barrier...">
+    <meta property="og:url" content="http://localhost:2368/creating-a-view-in-react-native/">
+    <meta property="article:published_time" content="2015-05-05T17:38:36.927Z">
+    <meta property="article:modified_time" content="2015-05-05T17:38:36.925Z">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Creating a view in React Native">
+    <meta name="twitter:description" content="React Native is a great tool with potentially far-reaching implications on how the future of mobile development will play out.  The ability to create native iOS and Android apps in JavaScript breaks down what otherwise would be a high barrier...">
+    <meta name="twitter:url" content="http://localhost:2368/creating-a-view-in-react-native/">
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "TravLearnsJS",
+    "author": {
+        "@type": "Person",
+        "name": "Travis Neufeld",
+        "image": "//www.gravatar.com/avatar/d02f1d451097a193d4d54da68ad468c2?s=250&d=mm&r=x",
+        "url": "http://localhost:2368/author/travis",
+        "sameAs": null
+    },
+    "headline": "Creating a view in React Native",
+    "url": "http://localhost:2368/creating-a-view-in-react-native/",
+    "datePublished": "2015-05-05T17:38:36.927Z",
+    "dateModified": "2015-05-05T17:38:36.925Z",
+    "description": "React Native is a great tool with potentially far-reaching implications on how the future of mobile development will play out.  The ability to create native iOS and Android apps in JavaScript breaks down what otherwise would be a high barrier..."
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.5">
+    <link rel="alternate" type="application/rss+xml" title="TravLearnsJS" href="http://localhost:2368/rss/">
+</head>
+<body class="post-template nav-closed">
+
+    <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="index.html#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+            <li class="nav-home" role="presentation"><a href="http://localhost:2368/">Home</a></li>
+    </ul>
+    <a class="subscribe-button icon-feed" href="../rss/index.rss">Subscribe</a>
+</div>
+<span class="nav-cover"></span>
+
+
+    <div class="site-wrapper">
+
+        
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        
+            <a class="menu-button" href="index.html#"><span class="burger">☰</span><span class="word">Menu</span></a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">Creating a view in React Native</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2015-05-05">05 May 2015</time> 
+            </section>
+        </header>
+
+        <section class="post-content">
+            <p>React Native is a great tool with potentially far-reaching implications on how the future of mobile development will play out.  The ability to create native iOS and Android apps in JavaScript breaks down what otherwise would be a high barrier of entry into an increasingly popular medium for applications.  Unfortunately however, it's not as easy as creating a web page with JavaScript and clicking a big red "React Native" button that automagically starts running anything on an iPhone.  It's still much easier than learning a new language and in this post I'll describe one of the major departures from regular JS: setting up your view.</p>
+
+<p>In React for the web, you must create a render method on each of your components that defines your view.  If you're writing your code in JSX (and you should be) your render code will have a striking resemblance to html and you can simply hook that into the DOM wherever you want it by calling React.render on whichever component you'd like to load, specifying which element to append it to.  In React Native however, there is no DOM, let alone html.  Therefore, all of your view is created within the render method of your components and instead of appending those components to an html element, you simply call AppRegistry.registerComponent('idOfComponent', () =&gt; yourComponent).  The main difference lies in what is written within the render method of said component.</p>
+
+<p>Instead of writing your JSX code as if it were html, you have to use the specific iOS view elements to layout your view.  Even though React Native is in its infancy, there are a lot of great view components available to use that will give your app the look and feel of a native application.  <code>&lt;Text /&gt; &lt;View /&gt; &lt;InputText /&gt; and &lt;SliderIOS /&gt;</code> are just a few examples of the elements used instead of traditional html like <code>&lt;p&gt; &lt;div&gt; &lt;input&gt;</code> etc.  The React Native docs can be found <a href="https://facebook.github.io/react-native/docs/view.html#content">here</a> and have a full list of built-in components.  You can simply write these in the layout you prefer and it's just like having the html elements on your page but they'll be resting happily in a native iOS environment.</p>
+        </section>
+
+        <footer class="post-footer">
+
+
+            <figure class="author-image">
+                <a class="img" href="../author/travis/" style="background-image: url(http://www.gravatar.com/avatar/d02f1d451097a193d4d54da68ad468c2?s=250&amp;d=mm&amp;r=x)"><span class="hidden">Travis Neufeld's Picture</span></a>
+            </figure>
+
+            <section class="author">
+                <h4><a href="../author/travis/">Travis Neufeld</a></h4>
+
+                    <p>Read <a href="../author/travis/">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    
+                    
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/share?text=Creating%20a%20view%20in%20React%20Native&amp;url=http://localhost:2368/creating-a-view-in-react-native/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/creating-a-view-in-react-native/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://localhost:2368/creating-a-view-in-react-native/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+        </footer>
+
+    </article>
+</main>
+
+
+
+        <footer class="site-footer clearfix">
+            <section class="copyright"><a href="http://localhost:2368">TravLearnsJS</a> © 2015</section>
+            <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
+        </footer>
+
+    </div>
+
+    <script src="../public/jquery.js?v=8ca38d0623"></script>
+
+    <script type="text/javascript" src="../assets/js/jquery.fitvids.js?v=8ca38d0623"></script>
+    <script type="text/javascript" src="../assets/js/index.js?v=8ca38d0623"></script>
+
+</body>
