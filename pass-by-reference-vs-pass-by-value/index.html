@@ -1,0 +1,260 @@
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Pass by Reference vs. Pass by Value</title>
+    <meta name="description" content="">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/screen.css?v=3af9244fe2">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400">
+
+    <link rel="canonical" href="http://localhost:2368/pass-by-reference-vs-pass-by-value/">
+    
+    <meta property="og:site_name" content="TravLearnsJS">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Pass by Reference vs. Pass by Value">
+    <meta property="og:description" content="JavaScript is both a pass by reference and pass by value language. When dealing with primitive types of data, JavaScript will pass that data by value but will pass JavaScript Objects by reference. This inconsistency can lead to confusion for...">
+    <meta property="og:url" content="http://localhost:2368/pass-by-reference-vs-pass-by-value/">
+    <meta property="article:published_time" content="2015-07-28T21:20:16.762Z">
+    <meta property="article:modified_time" content="2015-07-28T21:20:16.761Z">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Pass by Reference vs. Pass by Value">
+    <meta name="twitter:description" content="JavaScript is both a pass by reference and pass by value language. When dealing with primitive types of data, JavaScript will pass that data by value but will pass JavaScript Objects by reference. This inconsistency can lead to confusion for...">
+    <meta name="twitter:url" content="http://localhost:2368/pass-by-reference-vs-pass-by-value/">
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "TravLearnsJS",
+    "author": {
+        "@type": "Person",
+        "name": "Travis Neufeld",
+        "image": "//www.gravatar.com/avatar/d02f1d451097a193d4d54da68ad468c2?s=250&d=mm&r=x",
+        "url": "http://localhost:2368/author/travis",
+        "sameAs": null
+    },
+    "headline": "Pass by Reference vs. Pass by Value",
+    "url": "http://localhost:2368/pass-by-reference-vs-pass-by-value/",
+    "datePublished": "2015-07-28T21:20:16.762Z",
+    "dateModified": "2015-07-28T21:20:16.761Z",
+    "description": "JavaScript is both a pass by reference and pass by value language. When dealing with primitive types of data, JavaScript will pass that data by value but will pass JavaScript Objects by reference. This inconsistency can lead to confusion for..."
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.5">
+    <link rel="alternate" type="application/rss+xml" title="TravLearnsJS" href="http://localhost:2368/rss/">
+</head>
+<body class="post-template nav-closed">
+
+    <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="index.html#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+            <li class="nav-home" role="presentation"><a href="http://localhost:2368/">Home</a></li>
+    </ul>
+    <a class="subscribe-button icon-feed" href="../rss/index.rss">Subscribe</a>
+</div>
+<span class="nav-cover"></span>
+
+
+    <div class="site-wrapper">
+
+        
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        
+            <a class="menu-button" href="index.html#"><span class="burger">☰</span><span class="word">Menu</span></a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">Pass by Reference vs. Pass by Value</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2015-07-28">28 July 2015</time> 
+            </section>
+        </header>
+
+        <section class="post-content">
+            <p>JavaScript is both a pass by reference and pass by value language. When dealing with primitive types of data, JavaScript will pass that data by value but will pass JavaScript Objects by reference. This inconsistency can lead to confusion for new developers who may not be getting the results they expect when using JavaScript objects or arrays (which are also JS objects). Let's explore this aspect of the language and the implications it has on your code.</p>
+
+<h6 id="passing">Passing</h6>
+
+<p>Passing typically refers to invoking a function with arguments. You "pass" arguments into a function at call-time.  </p>
+
+<pre><code class="language-JavaScript">var sum = function(x, y) {  
+  return x + y;
+}
+
+var a = 2;  
+var b = 3;
+
+sum(a, b); // Passing arguments into the sum function  
+</code></pre>
+
+<p>For this lesson, passing can also refer to assigning a value to a variable.  </p>
+
+<pre><code>var a = 5;  
+var b = a;
+
+console.log(b); // 5  
+</code></pre>
+
+<h6 id="passingbyvalue">Passing by Value</h6>
+
+<p>First we'll cover passing by value. Passing by value essentially means creating a new copy of a piece of data in memory so any changes made to the new variable (or parameter in a function) does not affect the original piece of data. Let's explore what that means.  </p>
+
+<pre><code>var a = 3;  
+var b = a;  
+a = 5;
+
+console.log(b); // 3  
+</code></pre>
+
+<p>As you can see, we passed the value of <code>a</code> to <code>b</code> when we declared the new variable <code>b</code>. We then went on to change the value of <code>a</code> after passing its value to <code>b</code> and the value of <code>b</code> was unchanged.  </p>
+
+<p>This is because when we assign the value of a variable to a new variable, if the value is a primitive type in JavaScript, a copy of that data is made. Primitive types in JavaScript are:  <code>undefined</code> <code>null</code> <code>boolean</code> <code>number</code> <code>string</code>. </p>
+
+<p>Here's an example of passing by value into a function.  </p>
+
+<pre><code>var sumSquares = function(x, y) {  
+  x = x * x;
+  y = y * y;
+  return x + y;
+}
+
+var a = 2;  
+var b = 3;
+
+sumSquares(a, b);  // 13  
+console.log(a);  // 2  
+console.log(b);  // 3  
+</code></pre>
+
+<p>Here we're initializing variables <code>a</code> and <code>b</code> to the values 2 and 3 respectively. We then pass those variables into our function <code>sumSquares</code> which goes on to manipulate those values by squaring them and then returning the sum of the squared values. After the function runs, the original values of <code>a</code> and <code>b</code> are unchanged. This is because 2 and 3 are numbers which are primitive types in JavaScript. Now let's take a look at passing by reference.</p>
+
+<h6 id="passingbyreference">Passing by Reference</h6>
+
+<p>The alternative to passing by value is passing data by reference. In JavaScript, objects are always passed by reference. That means that instead of making a copy of the data when it is passed, JavaScript will instead store a reference to that data. In other words, when you pass an object, a pointer to that object's place in memory is created and assigned to the new variable or parameter on the other end of the pass. Let's look at the implications of passing by reference.  </p>
+
+<pre><code>var passByRef = function(obj) {  
+    // inside this function, obj is just a pointer to myObject
+    // any changes made to obj inside this function will affect myObject
+    obj.name: “Susan”;
+    return obj;
+}
+
+var myObject = {  
+    name: “Travis”,
+    age: 27
+}
+
+passByRef(myObject);  
+console.log(myObject); // { name: “Susan”, age: 27 };  
+</code></pre>
+
+<p>What happened here? As we were discussing, <code>myObject</code> was passed by reference to the function <code>passByRef</code>. What that means is that the parameter <code>obj</code> inside the function is just a pointer to where <code>myObject</code> lives in memory, therefore any changes made to the parameter <code>obj</code> will be directed back to the original object. When a function performs actions that affect the variables outside of the function, that function is said to have side-effects. A function that has side-effects does not follow code design best practices and should be avoided whenever possible. Here's another example that may leave you scratching your head.  </p>
+
+<pre><code>var myObj = {  
+  name: 'Travis'
+};
+
+var newObj = myObj;
+
+newObj.name = 'Sarah';
+
+console.log(newObj); // { name: 'Travis' };  
+console.log(myObj);  // { name: 'Sarah' };  
+</code></pre>
+
+<p><code>newObj</code> is also just a pointer to the original object <code>myObj</code> so any changes we make to either variable will be reflected in both variables. The object only exists in one place in memory and every time we pass that object, we simply create a pointer to the original object.</p>
+
+<p>How can we avoid side effects then? An easy and generalized answer that does not apply to every situation is to create a new object/array within the function that is being called and place the mutated values into that new object.  </p>
+
+<pre><code>var firstSquareRoot = function(arr) {  
+    var newArray = [];  // Create a new array so we don't modify myArray
+    for (var i = 0; i &lt; arr.length; i++) {
+        newArray = arr[i] * arr[i];  // Push mutated values into newArray
+    }
+
+    return newArray;  // Return the newArray
+                      // We never changed the values in arr
+}
+
+var myArray = [1, 2, 3];  
+var squaredArray = firstSquareRoot(myArray);
+
+console.log(squaredArray); // [1, 4, 9]  
+console.log(myArray);         // [1, 2, 3] // Original array is unmodified  
+</code></pre>
+
+<h6 id="conclusion">Conclusion</h6>
+
+<p>Knowing when data is passed by value and when it's passed by reference is simple knowledge that will save you many headaches when debugging code that would otherwise look like it had a mind of its own. If you simply remember that passing an object to a function or assigning it to a new variable passes it by reference, you'll be a better developer due to writing functions without side-effects and avoiding bugs.</p>
+        </section>
+
+        <footer class="post-footer">
+
+
+            <figure class="author-image">
+                <a class="img" href="../author/travis/" style="background-image: url(http://www.gravatar.com/avatar/d02f1d451097a193d4d54da68ad468c2?s=250&amp;d=mm&amp;r=x)"><span class="hidden">Travis Neufeld's Picture</span></a>
+            </figure>
+
+            <section class="author">
+                <h4><a href="../author/travis/">Travis Neufeld</a></h4>
+
+                    <p>Read <a href="../author/travis/">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    
+                    
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/share?text=Pass%20by%20Reference%20vs.%20Pass%20by%20Value&amp;url=http://localhost:2368/pass-by-reference-vs-pass-by-value/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/pass-by-reference-vs-pass-by-value/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://localhost:2368/pass-by-reference-vs-pass-by-value/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+        </footer>
+
+    </article>
+</main>
+
+
+
+        <footer class="site-footer clearfix">
+            <section class="copyright"><a href="http://localhost:2368">TravLearnsJS</a> © 2015</section>
+            <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
+        </footer>
+
+    </div>
+
+    <script src="../public/jquery.js?v=3af9244fe2"></script>
+
+    <script type="text/javascript" src="../assets/js/jquery.fitvids.js?v=3af9244fe2"></script>
+    <script type="text/javascript" src="../assets/js/index.js?v=3af9244fe2"></script>
+
+</body>

@@ -1,4 +1,118 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>TravLearnsJS</title><description>TravLearnsJS</description><link>http://localhost:2368/</link><generator>Ghost 0.5</generator><lastBuildDate>Tue, 19 May 2015 15:49:08 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Fixing click events with Ionic and Leaflet/Google Maps</title><description>&lt;p&gt;This short post is meant to solve a scarcely documented problem that occurs when using Ionic with a mapping library such as Leaflet or Google Maps.  The bug is such that click or touch events on the map that perform actions such as opening marker popups or registering the position of the mouse stop firing when the user clicks an element that isn't the map.  It appears then as if all of the map's event listeners are removed whenever a touch or click event occurs off the map.&lt;/p&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>TravLearnsJS</title><description>TravLearnsJS</description><link>http://localhost:2368/</link><generator>Ghost 0.5</generator><lastBuildDate>Tue, 28 Jul 2015 21:21:12 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Pass by Reference vs. Pass by Value</title><description>&lt;p&gt;JavaScript is both a pass by reference and pass by value language. When dealing with primitive types of data, JavaScript will pass that data by value but will pass JavaScript Objects by reference. This inconsistency can lead to confusion for new developers who may not be getting the results they expect when using JavaScript objects or arrays (which are also JS objects). Let's explore this aspect of the language and the implications it has on your code.&lt;/p&gt;
+
+&lt;h6 id="passing"&gt;Passing&lt;/h6&gt;
+
+&lt;p&gt;Passing typically refers to invoking a function with arguments. You "pass" arguments into a function at call-time.  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-JavaScript"&gt;var sum = function(x, y) {  
+  return x + y;
+}
+
+var a = 2;  
+var b = 3;
+
+sum(a, b); // Passing arguments into the sum function  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For this lesson, passing can also refer to assigning a value to a variable.  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var a = 5;  
+var b = a;
+
+console.log(b); // 5  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h6 id="passingbyvalue"&gt;Passing by Value&lt;/h6&gt;
+
+&lt;p&gt;First we'll cover passing by value. Passing by value essentially means creating a new copy of a piece of data in memory so any changes made to the new variable (or parameter in a function) does not affect the original piece of data. Let's explore what that means.  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var a = 3;  
+var b = a;  
+a = 5;
+
+console.log(b); // 3  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see, we passed the value of &lt;code&gt;a&lt;/code&gt; to &lt;code&gt;b&lt;/code&gt; when we declared the new variable &lt;code&gt;b&lt;/code&gt;. We then went on to change the value of &lt;code&gt;a&lt;/code&gt; after passing its value to &lt;code&gt;b&lt;/code&gt; and the value of &lt;code&gt;b&lt;/code&gt; was unchanged.  &lt;/p&gt;
+
+&lt;p&gt;This is because when we assign the value of a variable to a new variable, if the value is a primitive type in JavaScript, a copy of that data is made. Primitive types in JavaScript are:  &lt;code&gt;undefined&lt;/code&gt; &lt;code&gt;null&lt;/code&gt; &lt;code&gt;boolean&lt;/code&gt; &lt;code&gt;number&lt;/code&gt; &lt;code&gt;string&lt;/code&gt;. &lt;/p&gt;
+
+&lt;p&gt;Here's an example of passing by value into a function.  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var sumSquares = function(x, y) {  
+  x = x * x;
+  y = y * y;
+  return x + y;
+}
+
+var a = 2;  
+var b = 3;
+
+sumSquares(a, b);  // 13  
+console.log(a);  // 2  
+console.log(b);  // 3  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here we're initializing variables &lt;code&gt;a&lt;/code&gt; and &lt;code&gt;b&lt;/code&gt; to the values 2 and 3 respectively. We then pass those variables into our function &lt;code&gt;sumSquares&lt;/code&gt; which goes on to manipulate those values by squaring them and then returning the sum of the squared values. After the function runs, the original values of &lt;code&gt;a&lt;/code&gt; and &lt;code&gt;b&lt;/code&gt; are unchanged. This is because 2 and 3 are numbers which are primitive types in JavaScript. Now let's take a look at passing by reference.&lt;/p&gt;
+
+&lt;h6 id="passingbyreference"&gt;Passing by Reference&lt;/h6&gt;
+
+&lt;p&gt;The alternative to passing by value is passing data by reference. In JavaScript, objects are always passed by reference. That means that instead of making a copy of the data when it is passed, JavaScript will instead store a reference to that data. In other words, when you pass an object, a pointer to that object's place in memory is created and assigned to the new variable or parameter on the other end of the pass. Let's look at the implications of passing by reference.  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var passByRef = function(obj) {  
+    // inside this function, obj is just a pointer to myObject
+    // any changes made to obj inside this function will affect myObject
+    obj.name: “Susan”;
+    return obj;
+}
+
+var myObject = {  
+    name: “Travis”,
+    age: 27
+}
+
+passByRef(myObject);  
+console.log(myObject); // { name: “Susan”, age: 27 };  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What happened here? As we were discussing, &lt;code&gt;myObject&lt;/code&gt; was passed by reference to the function &lt;code&gt;passByRef&lt;/code&gt;. What that means is that the parameter &lt;code&gt;obj&lt;/code&gt; inside the function is just a pointer to where &lt;code&gt;myObject&lt;/code&gt; lives in memory, therefore any changes made to the parameter &lt;code&gt;obj&lt;/code&gt; will be directed back to the original object. When a function performs actions that affect the variables outside of the function, that function is said to have side-effects. A function that has side-effects does not follow code design best practices and should be avoided whenever possible. Here's another example that may leave you scratching your head.  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var myObj = {  
+  name: 'Travis'
+};
+
+var newObj = myObj;
+
+newObj.name = 'Sarah';
+
+console.log(newObj); // { name: 'Travis' };  
+console.log(myObj);  // { name: 'Sarah' };  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;newObj&lt;/code&gt; is also just a pointer to the original object &lt;code&gt;myObj&lt;/code&gt; so any changes we make to either variable will be reflected in both variables. The object only exists in one place in memory and every time we pass that object, we simply create a pointer to the original object.&lt;/p&gt;
+
+&lt;p&gt;How can we avoid side effects then? An easy and generalized answer that does not apply to every situation is to create a new object/array within the function that is being called and place the mutated values into that new object.  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var firstSquareRoot = function(arr) {  
+    var newArray = [];  // Create a new array so we don't modify myArray
+    for (var i = 0; i &amp;lt; arr.length; i++) {
+        newArray = arr[i] * arr[i];  // Push mutated values into newArray
+    }
+
+    return newArray;  // Return the newArray
+                      // We never changed the values in arr
+}
+
+var myArray = [1, 2, 3];  
+var squaredArray = firstSquareRoot(myArray);
+
+console.log(squaredArray); // [1, 4, 9]  
+console.log(myArray);         // [1, 2, 3] // Original array is unmodified  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h6 id="conclusion"&gt;Conclusion&lt;/h6&gt;
+
+&lt;p&gt;Knowing when data is passed by value and when it's passed by reference is simple knowledge that will save you many headaches when debugging code that would otherwise look like it had a mind of its own. If you simply remember that passing an object to a function or assigning it to a new variable passes it by reference, you'll be a better developer due to writing functions without side-effects and avoiding bugs.&lt;/p&gt;</description><link>http://localhost:2368/pass-by-reference-vs-pass-by-value/</link><guid isPermaLink="false">e419bdc4-f507-4c0f-9822-b78c55809f16</guid><dc:creator>Travis Neufeld</dc:creator><pubDate>Tue, 28 Jul 2015 21:20:16 GMT</pubDate></item><item><title>Fixing click events with Ionic and Leaflet/Google Maps</title><description>&lt;p&gt;This short post is meant to solve a scarcely documented problem that occurs when using Ionic with a mapping library such as Leaflet or Google Maps.  The bug is such that click or touch events on the map that perform actions such as opening marker popups or registering the position of the mouse stop firing when the user clicks an element that isn't the map.  It appears then as if all of the map's event listeners are removed whenever a touch or click event occurs off the map.&lt;/p&gt;
 
 &lt;p&gt;Fortunately it's an easy fix and has to do with a built-in feature of Ionic that changes the default properties of touch events so they feel consistent across different devices.  Some mobile browsers implement a 300ms delay from the time a touch event occurs to when the touch event executes in order to listen for double-taps.  Ionic removes this delay.  This is fine for most apps but causes an issue when a part of your app, such as a map library, also decides to start messing with the default behavior of click events.&lt;/p&gt;
 
@@ -213,4 +327,4 @@ container();&lt;/blockquote&gt;
 
 &lt;p style="text-align:left;"&gt;Creating a closure scope is as simple as constructing a function within a function.  Because the variables alreadyCalled and result are declared in the outer function, they are saved in memory as long as one part of the code is still pointing to it.  Therefore, when we call _.once a second time, alreadyCalled and result will retain their values from when they were called the first time even though we are calling the function again.  The reason behind this somewhat mysterious characteristic of Javascript has to do with the way JS allocates its memory when it encounters functions within functions.  As a result, we the coders reap the benefits of values being saved after the functions they're declared within terminate.  This is just one (simple) explanation of a javascript closure.&lt;/p&gt;  
 
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;</description><link>http://localhost:2368/closures-in-javascript/</link><guid isPermaLink="false">f25fa789-5192-4dbb-98c9-ee3da16782ad</guid><dc:creator>Travis Neufeld</dc:creator><pubDate>Wed, 25 Mar 2015 02:15:14 GMT</pubDate></item><item><title>Learning JavaScript</title><description>&lt;p&gt;As I begin my foray into formal Javascript education here at MakerSquare in San Francisco, I'll be sharing my experiences and things I learn along the way.  Writing out explanations of newly gained knowledge is a great way to clarify new ideas and hopefully simplify them in my own mind by trying to simplify them onto a blog post.  I hope this blog helps anyone reading it as much as it will help me.  May your (and my) coding be happy!&lt;/p&gt;</description><link>http://localhost:2368/learning-javascript/</link><guid isPermaLink="false">5a821c28-5d78-4833-adf7-470fda292689</guid><dc:creator>Travis Neufeld</dc:creator><pubDate>Tue, 24 Mar 2015 15:12:55 GMT</pubDate></item></channel></rss>
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;</description><link>http://localhost:2368/closures-in-javascript/</link><guid isPermaLink="false">f25fa789-5192-4dbb-98c9-ee3da16782ad</guid><dc:creator>Travis Neufeld</dc:creator><pubDate>Wed, 25 Mar 2015 02:15:14 GMT</pubDate></item></channel></rss>
