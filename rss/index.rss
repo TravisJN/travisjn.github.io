@@ -1,4 +1,4 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>TravLearnsJS</title><description>TravLearnsJS</description><link>http://localhost:2368/</link><generator>Ghost 0.5</generator><lastBuildDate>Tue, 28 Jul 2015 21:21:12 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Pass by Reference vs. Pass by Value</title><description>&lt;p&gt;JavaScript is both a pass by reference and pass by value language. When dealing with primitive types of data, JavaScript will pass that data by value but will pass JavaScript Objects by reference. This inconsistency can lead to confusion for new developers who may not be getting the results they expect when using JavaScript objects or arrays (which are also JS objects). Let's explore this aspect of the language and the implications it has on your code.&lt;/p&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>TravLearnsJS</title><description>TravLearnsJS</description><link>http://localhost:2368/</link><generator>Ghost 0.5</generator><lastBuildDate>Wed, 29 Jul 2015 16:27:13 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Pass by Reference vs. Pass by Value</title><description>&lt;p&gt;JavaScript is both a pass by reference and pass by value language. When dealing with primitive types of data, JavaScript will pass that data by value but will pass JavaScript Objects by reference. This inconsistency can lead to confusion for new developers who may not be getting the results they expect when using JavaScript objects or arrays (which are also JS objects). Let's explore this aspect of the language and the implications it has on your code.&lt;/p&gt;
 
 &lt;h6 id="passing"&gt;Passing&lt;/h6&gt;
 
@@ -85,7 +85,7 @@ var newObj = myObj;
 
 newObj.name = 'Sarah';
 
-console.log(newObj); // { name: 'Travis' };  
+console.log(newObj); // { name: 'Sarah' };  
 console.log(myObj);  // { name: 'Sarah' };  
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -96,7 +96,7 @@ console.log(myObj);  // { name: 'Sarah' };
 &lt;pre&gt;&lt;code&gt;var firstSquareRoot = function(arr) {  
     var newArray = [];  // Create a new array so we don't modify myArray
     for (var i = 0; i &amp;lt; arr.length; i++) {
-        newArray = arr[i] * arr[i];  // Push mutated values into newArray
+        newArray.push(arr[i] * arr[i]);  // Push mutated values into newArray
     }
 
     return newArray;  // Return the newArray
@@ -106,7 +106,7 @@ console.log(myObj);  // { name: 'Sarah' };
 var myArray = [1, 2, 3];  
 var squaredArray = firstSquareRoot(myArray);
 
-console.log(squaredArray); // [1, 4, 9]  
+console.log(squaredArray);    // [1, 4, 9]  
 console.log(myArray);         // [1, 2, 3] // Original array is unmodified  
 &lt;/code&gt;&lt;/pre&gt;
 
