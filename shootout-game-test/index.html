@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400">
 
     <link rel="canonical" href="http://localhost:2368/shootout-game-test/">
-    
+
     <meta property="og:site_name" content="TravLearnsJS">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Shootout game test">
@@ -23,12 +23,12 @@
     <meta property="og:url" content="http://localhost:2368/shootout-game-test/">
     <meta property="article:published_time" content="2015-03-28T05:15:10.940Z">
     <meta property="article:modified_time" content="2015-03-28T05:15:10.940Z">
-    
+
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Shootout game test">
     <meta name="twitter:description" content="Attempting to show off my new game on my blog:...">
     <meta name="twitter:url" content="http://localhost:2368/shootout-game-test/">
-    
+
     <script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -69,12 +69,12 @@
 
     <div class="site-wrapper">
 
-        
+
 
 
 <header class="main-header post-head no-cover">
     <nav class="main-nav  clearfix">
-        
+
             <a class="menu-button" href="index.html#"><span class="burger">☰</span><span class="word">Menu</span></a>
     </nav>
 </header>
@@ -85,12 +85,23 @@
         <header class="post-header">
             <h1 class="post-title">Shootout game test</h1>
             <section class="post-meta">
-                <time class="post-date" datetime="2015-03-27">27 March 2015</time> 
+                <time class="post-date" datetime="2015-03-27">27 March 2015</time>
             </section>
         </header>
 
         <section class="post-content">
-            <p>Attempting to show off my new game on my blog:</p>
+            <p>A Missile Command style game written in JavaScript using D3 for graphics and animations. Enjoy :)</p>
+            <div class="content-area">
+                <div class="scoreboard">
+                  <h1>ShootOut!</h1>
+                  <!-- Modify the scoreboard when important events occur in your game! -->
+                  <div>Score: <span class="score">0</span>  High Score: <span class="high-score">0</span></div>
+                </div>
+                <div class="gameSpace"></div>
+                <script src='https://code.jquery.com/jquery-2.2.0.min.js'></script>
+                <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+                <script src='../scripts/watchout-updated.js'></script>
+            </div>
         </section>
 
         <footer class="post-footer">
@@ -105,8 +116,8 @@
 
                     <p>Read <a href="../author/travis/">more posts</a> by this author.</p>
                 <div class="author-meta">
-                    
-                    
+
+
                 </div>
             </section>
 

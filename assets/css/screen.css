@@ -1889,3 +1889,45 @@ body:not(.post-template) .post-title {
    End of file. Animations should be the last thing here. Do not add stuff
    below this point, or it will probably fuck everything up.
    ========================================================================== */
+.content-area {
+    height: 600;
+    width: 600;
+}
+
+h1 .watchout{
+    font-family: calibri;
+    font-size: 40px;
+    font-weight: 300;
+    letter-spacing: 0.8em;
+    text-align: center;
+    text-shadow: 5px 5px 5px #fff;
+}
+
+.gameSpace {
+    background: url("../images/background.png");
+    margin-left: 15px;
+    margin-right: auto;
+    position: relative;
+}
+
+.scoreboard {
+    margin-left: 15px;
+    text-align: center;
+    width: 800px;
+}
+
+.scoreboard div{
+    display: inline-block;
+    text-align: center;
+}
+
+.collisionCircle {
+  fill : 'red'
+}
+
+.stats {
+    height: 200px;
+    width: 200px;
+    background-color: red;
+    float: left;
+}
