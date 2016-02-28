@@ -1931,3 +1931,22 @@ h1 .watchout{
     background-color: red;
     float: left;
 }
+
+.scores {
+    color: black;
+    width: 25%;
+    position: absolute;
+    float: left;
+    top: 50px;
+    left: 20px;
+}
+
+.text {
+    text-shadow:
+	1px 1px 0 #CCC,
+	1px 1px 0 #CCC, /* end of 2 level deep grey shadow */
+	1px 1px 0 #444,
+	1px 1px 0 #444,
+	1px 1px 0 #444,
+	1px 1px 0 #444; /* end of 4 level deep dark shadow */
+}
