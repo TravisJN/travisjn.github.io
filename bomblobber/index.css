@@ -1,0 +1,11 @@
+.offset {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+}
+
+.default {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
